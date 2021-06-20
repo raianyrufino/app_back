@@ -25,4 +25,9 @@ class ServicoController extends Controller
     {
         return $this->servicoService->getAll();
     }
+
+    public function getAllWithPagination()
+    {
+        return $this->servicoService->getAllWithPagination();
+    }
 }

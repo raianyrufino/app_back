@@ -32,6 +32,13 @@ class ServicoService
 
     public function getAll()
     {
+        $servicos = $this->servicoRepository->getAll();
+
+        return response()->json($servicos);
+    }
+
+    public function getAllWithPagination()
+    {
         $servicos = $this->servicoRepository->getAllWithPagination(10);
 
         if(!$servicos){
