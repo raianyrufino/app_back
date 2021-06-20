@@ -49,6 +49,11 @@ DB_PASSWORD=
 php artisan migrate
 ```
 
+## Executar Seeders
+```
+php artisan db:seed 
+```
+
 ## Executar Aplicação
 ```
 php artisan serve
