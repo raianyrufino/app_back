@@ -15,6 +15,7 @@ class Procedimento extends Model
         'id',
         'nome', 
         'valor', 
+        'comissao'
     ];
 
     protected $hidden = ['created_at','updated_at'];

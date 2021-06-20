@@ -20,12 +20,12 @@ class ServicoService
             throw new BusinessException("Serviço já registrado.", 406);
         }
 
-        $data = [
+        $dados = [
             'nome' => $nome, 
             'valor' => $valor,
         ];
 
-        $this->servicoRepository->create($data);
+        $this->servicoRepository->create($dados);
 
         return 'Serviço registrado com sucesso.';
     }
@@ -39,6 +39,20 @@ class ServicoService
         }
 
         return response()->json($servicos);
+    }
+
+    public function getValue($procedimento_id, $servicos) 
+    {
+        $valor = 00.00;
+
+        foreach ($servicos as $servico) {
+            $servico_encontrado = $this->servicoRepository->findBy('id', $servico);
+            $servico_encontrado->procedimentos()->attach($procedimento_id);
+
+            $valor += $servico_encontrado->valor;
+        }
+
+        return $valor;
     }
 }
 
