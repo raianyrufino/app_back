@@ -2,15 +2,17 @@
 
 namespace App\Models\Services;
 
-use App\Models\Repositories\{ProcedimentoRepository, ServicoRepository};
+use App\Models\Repositories\ProcedimentoRepository;
+use App\Models\Services\ServicoService;
 use App\Exceptions\BusinessException;
+use App\Models\Enum\TipoComissao;
 
 class ProcedimentoService
 {
-    public function __construct(ProcedimentoRepository $procedimentoRepository, ServicoRepository $servicoRepository)
+    public function __construct(ProcedimentoRepository $procedimentoRepository, ServicoService $servicoService)
     {
         $this->procedimentoRepository = $procedimentoRepository;
-        $this->servicoRepository = $servicoRepository;
+        $this->servicoService = $servicoService;
     }
 
     public function register($nome, $servicos)
@@ -21,24 +23,22 @@ class ProcedimentoService
             throw new BusinessException("Procedimento já registrado.", 406);
         }
 
-        $valor = 00.00;
-
-        $data = [
-            'nome' => $nome, 
-            'valor' => $valor, 
+        $dados = [
+            'nome' => $nome,
+            'valor' => 00.00
         ];
 
-        $procedimento_created = $this->procedimentoRepository->create($data);
+        $procedimento_criado = $this->procedimentoRepository->create($dados);
 
-        foreach ($servicos as $servico) {
-            $servico_found = $this->servicoRepository->findBy('id', $servico);
+        $valor = $this->servicoService->getValue($procedimento_criado->id, $servicos);
 
-            $valor += $servico_found->valor;
-            $servico_found->procedimentos()->attach($procedimento_created->id);
-        }
+        $dados = [
+            'valor' => $valor,
+            'comissao' => ($valor * TipoComissao::PADRAO)
+        ];
 
-        $this->procedimentoRepository->update(['valor' => $valor], $procedimento_created->id);
-
+        $this->procedimentoRepository->update($dados, $procedimento_criado->id);
+        
         return 'Procedimento registrado com sucesso.';
     }
 
