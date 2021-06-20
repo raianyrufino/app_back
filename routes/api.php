@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('procedimentos', 'App\Http\Controllers\ProcedimentoController@register');
+Route::get('procedimentos', 'App\Http\Controllers\ProcedimentoController@getAll');
+Route::get('procedimento/{id}', 'App\Http\Controllers\ProcedimentoController@getById');
+
+Route::post('servicos', 'App\Http\Controllers\ServicoController@register');
+Route::get('servicos', 'App\Http\Controllers\ServicoController@getAll');
