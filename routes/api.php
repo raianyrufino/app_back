@@ -19,4 +19,5 @@ Route::get('procedimentos', 'App\Http\Controllers\ProcedimentoController@getAll'
 Route::get('procedimento/{id}', 'App\Http\Controllers\ProcedimentoController@getById');
 
 Route::post('servicos', 'App\Http\Controllers\ServicoController@register');
-Route::get('servicos', 'App\Http\Controllers\ServicoController@getAll');
+Route::get('servicos', 'App\Http\Controllers\ServicoController@getAllWithPagination');
+Route::get('all-servicos', 'App\Http\Controllers\ServicoController@getAll');
