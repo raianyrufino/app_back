@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Entities\{Procedimento, Servico};
+use App\Models\Enum\TipoComissao;
 
 class DatabaseSeeder extends Seeder
 {
@@ -40,6 +41,7 @@ class DatabaseSeeder extends Seeder
             }
 
             $procedimento->valor = $valor;
+            $procedimento->comissao = ($valor * TipoComissao::PADRAO);
             $procedimento->save();
         });
     }
