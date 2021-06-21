@@ -4,10 +4,10 @@ Repositório do back-end da aplicação feita no desafio da Mesha
 
 Clonagem do diretório:
 ```
-git clone https://github.com/raianyrufino/desafio_back_mesha
+git clone https://github.com/raianyrufino/desafio_back
 ```
 
-Acesse a raiz do projeto `cd desafio_back_mesha`;
+Acesse a raiz do projeto `cd desafio_back`;
 
 Baixe as dependências do projeto via composer:
 ```
