@@ -1,5 +1,3 @@
-Repositório do back-end da aplicação feita no desafio da Mesha
-
 ## Instalação 
 
 Clonagem do diretório:
